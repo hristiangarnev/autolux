@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Header from './Meta';
+import Meta from './Meta';
 
 class Page extends Component {
   render() {
