@@ -1,6 +1,12 @@
 const Mutation = {
-  createDog(parent, args, ctx, info) {
-    console.log(args);
+  async createCar(parent, args, ctx, info) {
+    const car = await ctx.db.mutation.createCar({
+      data: {
+        ...args
+      }
+    }, info);
+    
+    return car;
   }
 };
 
