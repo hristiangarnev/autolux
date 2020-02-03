@@ -5,5 +5,5 @@ type Mutation {
 }
 
 type Query {
-  items: [Car]!
+  cars: [Car]!
 }
