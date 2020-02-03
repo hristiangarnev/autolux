@@ -1,7 +1,7 @@
+import Cars from '../components/Cars';
+
 const Home = () => (
-  <div>
-    <h1>Home</h1>
-  </div>
+  <Cars />
 );
 
 export default Home;
