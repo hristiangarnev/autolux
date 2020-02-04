@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 const NavElement = styled.nav`
   display: flex;
-  align-self: flex-end;
-
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 const Nav = () => (
