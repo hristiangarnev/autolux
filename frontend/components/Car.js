@@ -4,11 +4,26 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const CarItem = styled.div`
-  display: flex;
-  flex: 1 1 30%;
+  flex: 1 0 10px;
+  overflow: hidden;
 
-  img {
+  a {
     display: block;
+    margin: 5px;
+    border: 1px solid #dedede;
+    border-radius: 3px;
+
+    img {
+      width: 100%;
+      display: block;
+      max-width: 100%;
+    }
+
+    h2,
+    p,
+    span {
+      margin: 5px;
+    }
   }
 `;
 
@@ -21,7 +36,7 @@ export default class Car extends Component {
     return (
       <CarItem>
         <Link href={{
-          pathname: '/item',
+          pathname: '/car',
           query: { id: car.id }
         }}>
           <a>

@@ -76,19 +76,6 @@ class CreateCar extends Component {
               }}
             >
               <fieldset disabled={loading}>
-                <label htmlFor="file">
-                  Image
-                  <input
-                    type="file"
-                    id="file"
-                    name="file"
-                    placeholder="Upload an image"
-                    required
-                    onChange={this.uploadFile}
-                  />
-                  {this.state.image && <img src={this.state.image} alt="Upload preview" />}
-                </label>
-
                 <label htmlFor="title">
                   Title
                   <input
@@ -102,6 +89,20 @@ class CreateCar extends Component {
                   />
                 </label>
 
+                <label htmlFor="file">
+                  Image
+                  <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    placeholder="Upload an image"
+                    required
+                    onChange={this.uploadFile}
+                  />
+                  {this.state.image && <img src={this.state.image} alt="Upload preview" />}
+                </label>
+
+                
                 <label htmlFor="price">
                   Price
                   <input
