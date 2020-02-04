@@ -15,7 +15,7 @@ const ALL_CARS_QUERY = gql`
     }
   }
 `
-export default class Cars extends Component {
+class Cars extends Component {
   render() {
     return (
       <div>
@@ -33,3 +33,6 @@ export default class Cars extends Component {
     );
   }
 }
+
+export default Cars;
+export { ALL_CARS_QUERY };
