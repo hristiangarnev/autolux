@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import styled from 'styled-components';
+
+const CarItem = styled.div`
+  display: flex;
+  flex: 1 1 30%;
+
+  img {
+    display: block;
+  }
+`;
 
 export default class Car extends Component {
   static propTypes = {
@@ -9,30 +19,19 @@ export default class Car extends Component {
   render() {
     const { car } = this.props;
     return (
-      <div>
-        {car.image && <img src={car.image} alt={car.title} />}
+      <CarItem>
         <Link href={{
           pathname: '/item',
           query: { id: car.id }
         }}>
           <a>
-            {car.title}
+            {car.image && <img src={car.image} alt={car.title} />}
+            <h2>{car.title}</h2>
+            <span>{car.price}</span>
+            <p>{car.description}</p>
           </a>
         </Link>
-        {car.price}
-        {car.description}
-
-        <div>
-          <Link href={{
-            pathname: 'update',
-            query: { id: car.id }
-          }}>
-            <a>Edit</a>
-          </Link>
-          <button>Add to cart</button>
-          <button>Delete</button>
-        </div>
-      </div>
+      </CarItem>
     )
   }
 }

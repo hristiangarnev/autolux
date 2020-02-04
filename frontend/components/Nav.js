@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
+import styled from 'styled-components';
+
+const NavElement = styled.nav`
+  display: flex;
+  align-self: flex-end;
+
+`;
 
 const Nav = () => (
-  <div>
+  <NavElement>
     <Link href="/">
       <a>
         Home
-      </a> 
+      </a>
     </Link>
-    <Link href="/cars">
+    <Link href="/search">
       <a>
-        Cars
-      </a> 
+        Search
+      </a>
     </Link>
-  </div>
+    <Link href="/contact">
+      <a>
+        Contact
+      </a>
+    </Link>
+  </NavElement>
 )
 
 export default Nav;
