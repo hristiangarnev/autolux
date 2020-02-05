@@ -10,12 +10,23 @@ injectGlobal`
   *, *:before, *:after {
     box-sizing: inherit;
   }
+
+  @font-face {
+    font-family: 'Lato';
+    src: url('static/fonts/lato-regular-webfont.woff2') format('woff2'),
+         url('static/fonts/lato-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   body {
     padding: 0;
     margin: 0;
+    font-family: 'Lato';
     font-size: 16px;
     line-height: 1.2;
   }
+
   #wrapper {
     max-width: 960px;
     margin: 0 auto;

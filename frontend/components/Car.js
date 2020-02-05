@@ -43,7 +43,6 @@ export default class Car extends Component {
             {car.image && <img src={car.image} alt={car.title} />}
             <h2>{car.title}</h2>
             <span>{car.price}</span>
-            <p>{car.description}</p>
           </a>
         </Link>
       </CarItem>
