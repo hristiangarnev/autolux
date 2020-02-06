@@ -7,6 +7,7 @@ const HeaderElement = styled.header`
   display: flex;
   background: #333;
   align-items: center;
+  padding: 10px;
 `;
 
 class Header extends Component {

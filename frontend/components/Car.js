@@ -13,16 +13,25 @@ const CarItem = styled.div`
     border: 1px solid #dedede;
     border-radius: 3px;
 
-    img {
-      width: 100%;
-      display: block;
-      max-width: 100%;
+    .img-holder {
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        display: block;
+        max-width: 100%;
+        transition: all 0.2s ease-in-out;
+      }
     }
 
     h2,
     p,
     span {
       margin: 5px;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
     }
   }
 `;
@@ -40,7 +49,9 @@ export default class Car extends Component {
           query: { id: car.id }
         }}>
           <a>
-            {car.image && <img src={car.image} alt={car.title} />}
+            <div className="img-holder">
+              {car.image && <img src={car.image} alt={car.title} />}
+            </div>
             <h2>{car.title}</h2>
             <span>{car.price}</span>
           </a>

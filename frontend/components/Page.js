@@ -42,7 +42,6 @@ class Page extends Component {
     return (
       <div id="wrapper">
         <Meta />
-        {/* <GlobalStyle /> */}
         <Header />
         {this.props.children}
       </div>

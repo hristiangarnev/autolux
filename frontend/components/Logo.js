@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const LogoElement = styled.a`
   display: flex;
   max-width: 200px;
-  padding: 10px;
 
   img {
     max-width: 100%;
