@@ -13,7 +13,7 @@ const NavElement = styled.nav`
     color: #fff;
     font-size: 15px;
     line-height: 1.2;
-    margin-left: -5px;
+    margin-left: -15px;
     height: 32px;
 
     span {
@@ -30,15 +30,15 @@ const NavElement = styled.nav`
       transition: border-color 0.5s;
     }
 
-    &:before {
-      border-left: 10px solid transparent;
-      border-right: 0 solid transparent;
+    &:after {
+      border-right: 20px solid transparent;
+      border-left: 0 solid transparent;
       border-bottom: 32px solid red;
     }
 
-    &:after {
-      border-left: 0 solid transparent;
-      border-right: 10px solid transparent;
+    &:before {
+      border-right: 0 solid transparent;
+      border-left: 20px solid transparent;
       border-top: 32px solid red;
     }
 
@@ -50,11 +50,11 @@ const NavElement = styled.nav`
       }
 
       &:before {
-        border-bottom-color: #fff;
+        border-top-color: #fff;
       }
 
       &:after {
-        border-top-color: #fff;
+        border-bottom-color: #fff;
       }
     }
   }
@@ -84,7 +84,7 @@ const Nav = () => (
       </a>
     </Link>
 
-    <Contacts />
+    {/* <Contacts /> */}
   </NavElement>
 )
 

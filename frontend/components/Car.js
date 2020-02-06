@@ -7,7 +7,7 @@ const CarItem = styled.div`
   flex: 0 0 33.3333%;
   overflow: hidden;
 
-  a {
+  .car-holder {
     display: block;
     margin: 5px;
     border: 1px solid #dedede;
@@ -52,7 +52,7 @@ export default class Car extends Component {
           pathname: '/car',
           query: { id: car.id }
         }}>
-          <a>
+          <a className="car-holder">
             <div className="img-holder">
               {car.image && <img src={car.image} alt={car.title} />}
             </div>
