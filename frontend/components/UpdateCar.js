@@ -24,33 +24,7 @@ const UPDATE_CAR_MUTATION = gql`
 `;
 
 class UpdateCar extends Component {
-  state = {
-    title: '',
-    description: '',
-    image: '',
-    largeImage: '',
-    price: 0
-  };
-
-  uploadFile = async e => {
-    const files = e.target.files;
-    const data = new FormData();
-
-    data.append('file', files[0]);
-    data.append('upload_preset', 'autolux');
-
-    const res = await fetch('https://api.cloudinary.com/v1_1/hristiangarnev/image/upload', {
-      method: 'POST',
-      body: data
-    });
-
-    const file = await res.json();
-    console.log(file);
-    this.setState({
-      image: file.secure_url,
-      largeImage: file.eager[0].secure_url
-    })
-  }
+  state = {};
 
   handleChange = (e) => {
     const { name, type, value } = e.target;
@@ -88,20 +62,6 @@ class UpdateCar extends Component {
                     onChange={this.handleChange}
                   />
                 </label>
-
-                <label htmlFor="file">
-                  Image
-                  <input
-                    type="file"
-                    id="file"
-                    name="file"
-                    placeholder="Upload an image"
-                    required
-                    onChange={this.uploadFile}
-                  />
-                  {this.state.image && <img src={this.state.image} alt="Upload preview" />}
-                </label>
-
 
                 <label htmlFor="price">
                   Price

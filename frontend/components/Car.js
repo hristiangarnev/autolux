@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const CarItem = styled.div`
-  flex: 1 0 10px;
+  flex: 0 0 33.3333%;
   overflow: hidden;
 
   a {
@@ -22,6 +22,10 @@ const CarItem = styled.div`
         max-width: 100%;
         transition: all 0.2s ease-in-out;
       }
+    }
+
+    h2 {
+      font-size: 16px;
     }
 
     h2,
@@ -55,6 +59,12 @@ export default class Car extends Component {
             <h2>{car.title}</h2>
             <span>{car.price}</span>
           </a>
+        </Link>
+        <Link href={{
+          pathname: 'update',
+          query: { id: car.id }
+        }}>
+          <a>Update</a>
         </Link>
       </CarItem>
     )
