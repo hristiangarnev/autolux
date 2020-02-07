@@ -14,7 +14,7 @@ const Mutation = {
     delete updates.id;
     return ctx.db.mutation.updateCar({
       data: updates,
-      where: id === args.id
+      where: { id: args.id }
     }, info)
   }
 };

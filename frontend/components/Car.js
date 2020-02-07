@@ -61,7 +61,7 @@ export default class Car extends Component {
           </a>
         </Link>
         <Link href={{
-          pathname: 'update',
+          pathname: '/update',
           query: { id: car.id }
         }}>
           <a>Update</a>

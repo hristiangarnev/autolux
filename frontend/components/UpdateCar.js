@@ -3,8 +3,8 @@ import { Mutation, Query } from 'react-apollo';
 import Router from 'next/router';
 import gql from 'graphql-tag'
 
-const SINGLE_ITEM_QUERY = gql`
-  query SINGLE_ITEM_QUERY($id: ID!) {
+const SINGLE_CAR_QUERY = gql`
+  query SINGLE_CAR_QUERY($id: ID!) {
     car(where: { id: $id }) {
       id
       title
@@ -13,23 +13,13 @@ const SINGLE_ITEM_QUERY = gql`
     }
   }
 `;
-
 const UPDATE_CAR_MUTATION = gql`
-  mutation UPDATE_CAR_MUTATION(
-    $title: String!
-    $description: String!
-    $price: Int!
-    $image: String
-    $largeImage: String
-  ) {
-    createCar(
-      title: $title
-      description: $description
-      price: $price
-      image: $image
-      largeImage: $largeImage
-    ) {
+  mutation UPDATE_CAR_MUTATION($id: ID!, $title: String, $description: String, $price: Int) {
+    updateCar(id: $id, title: $title, description: $description, price: $price) {
       id
+      title
+      description
+      price
     }
   }
 `;
@@ -44,28 +34,33 @@ class UpdateCar extends Component {
     this.setState({ [name]: val });
   };
 
+  updateCar = async (e, updateCarMutation) => {
+    e.preventDefault();
+
+    const res = await updateCarMutation({
+      variables: {
+        id: this.props.id,
+        ...this.state
+      }
+    });
+
+  };
+
   render() {
     return (
       <div>
         <h2>Sell a car</h2>
-        <Query query={SINGLE_ITEM_QUERY} variables={{ id: this.props.id }}>
+        <Query
+          query={SINGLE_CAR_QUERY}
+          variables={{ id: this.props.id }}
+        >
           {({data, loading}) => {
-            if(loading) {
-              return <p>Loading</p>
-            }
+            if(loading) return <p>Loading</p>
+            if(!data.car) return <p>No car found</p>
             return (
               <Mutation mutation={UPDATE_CAR_MUTATION} variables={this.state}>
-                {(createCar, { loading, error}) => (
-                  <form action="" onSubmit={async (e) => {
-                      e.preventDefault();
-                      const res = await createCar();
-
-                      Router.push({
-                        pathname: '/car',
-                        query: { id: res.data.createCar.id }
-                      });
-                    }}
-                  >
+                {(updateCar, { loading, error}) => (
+                  <form onSubmit={e => this.updateCar(e, updateCar)}>
                     <fieldset disabled={loading}>
                       <label htmlFor="title">
                         Title
@@ -100,12 +95,12 @@ class UpdateCar extends Component {
                           name="description"
                           placeholder="Description"
                           required
-                          value={data.car.description}
+                          defaultValue={data.car.description}
                           onChange={this.handleChange}
                         ></textarea>
                       </label>
 
-                      <button type="submit">Submit</button>
+                      <button type="submit">Sav{loading ? 'ing' : 'e'} changes</button>
                     </fieldset>
                   </form>
                 )}
