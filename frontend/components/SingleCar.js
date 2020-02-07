@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import car from '../pages/car';
-import styled from 'styled-components';
 
 const SINGLE_CAR_QUERY = gql`
   query SINGLE_CAR_QUERY($id: ID!) {
