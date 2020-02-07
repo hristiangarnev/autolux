@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styled from 'styled-components';
+import DeleteCar from './DeleteCar';
 
 const CarItem = styled.div`
   flex: 0 0 33.3333%;
@@ -66,6 +67,7 @@ export default class Car extends Component {
         }}>
           <a>Update</a>
         </Link>
+        <DeleteCar id={car.id}>Delete</DeleteCar>
       </CarItem>
     )
   }
