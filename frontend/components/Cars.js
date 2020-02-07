@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Car from './Car';
+import Loading from './Loading';
 
 const ALL_CARS_QUERY = gql`
   query ALL_CARS_QUERY {
@@ -25,11 +26,11 @@ const CarList = styled.div`
 class Cars extends Component {
   render() {
     return (
-      <div>
+      <div className="home">
         <h1>Featured cars</h1>
         <Query query={ALL_CARS_QUERY}>
           {({data, error, loading}) => {
-            if(loading) return <p>Loading...</p>
+            if(loading) return <Loading />
             if(error) return <p>Error... {error.message}</p>
             return (
               <CarList>

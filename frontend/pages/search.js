@@ -1,5 +1,7 @@
 const Search = () => (
-  <h1>Search</h1>
+  <div className="search">
+    <h1>Search</h1>
+  </div>
 )
 
 export default Search;

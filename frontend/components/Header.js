@@ -5,9 +5,10 @@ import Logo from './Logo';
 
 const HeaderElement = styled.header`
   display: flex;
-  background: #333;
   align-items: center;
   padding: 10px;
+  max-width: 960px;
+  margin: 0 auto;
 `;
 
 class Header extends Component {

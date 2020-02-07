@@ -9,6 +9,7 @@ const CarItem = styled.div`
   overflow: hidden;
 
   .car-holder {
+    background: #fff;
     display: block;
     margin: 5px;
     border: 1px solid #dedede;

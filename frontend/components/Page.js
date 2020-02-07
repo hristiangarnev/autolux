@@ -28,9 +28,20 @@ injectGlobal`
   }
 
   #wrapper {
+    /* background: url('static/hero.jpg') no-repeat; */
+    /* background-size: cover; */
+  }
+
+  .home,
+  .car-view,
+  .car-update,
+  .search,
+  .contact,
+  .loading {
     max-width: 960px;
     margin: 0 auto;
   }
+
   a {
     color: #000;
     text-decoration: none;
