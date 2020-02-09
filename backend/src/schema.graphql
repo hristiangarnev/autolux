@@ -4,6 +4,7 @@ type Mutation {
   createCar(title: String, description: String, price: Int, image: String, largeImage: String): Car!
   updateCar(id: ID!, title: String, description: String, price: Int): Car!
   deleteCar(id: ID!): Car
+  signup(email: String!, password: String!, name: String!): User!
 }
 
 type Query {
