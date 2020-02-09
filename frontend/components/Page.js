@@ -45,6 +45,11 @@ injectGlobal`
   a {
     color: #000;
     text-decoration: none;
+
+    &[aria-disabled="true"] {
+      color: grey;
+      pointer-events: none;
+    }
   }
 `;
 
