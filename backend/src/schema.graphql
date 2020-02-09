@@ -7,6 +7,7 @@ type Mutation {
 }
 
 type Query {
-  cars: [Car]!
+  cars(where: CarWhereInput, orderBy: CarOrderByInput, skip: Int, first: Int): [Car]!
   car(where: CarWhereUniqueInput!): Car
+  carsConnection(where: CarWhereInput): CarConnection!
 }
