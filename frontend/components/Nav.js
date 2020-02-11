@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import User from './User';
 
 const NavElement = styled.nav`
   display: flex;
@@ -18,6 +19,14 @@ const NavElement = styled.nav`
 
 const Nav = () => (
   <NavElement>
+    <User>
+      {({data: { me } }) => {
+        if(me) {
+          return <p>{me.name}</p>;
+        }
+        return null;
+      }}
+    </User>
     <Link href="/">
       <a>
         Home

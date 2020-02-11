@@ -5,10 +5,12 @@ type Mutation {
   updateCar(id: ID!, title: String, description: String, price: Int): Car!
   deleteCar(id: ID!): Car
   signup(email: String!, password: String!, name: String!): User!
+  signin(email: String!, password: String!): User!
 }
 
 type Query {
   cars(where: CarWhereInput, orderBy: CarOrderByInput, skip: Int, first: Int): [Car]!
   car(where: CarWhereUniqueInput!): Car
   carsConnection(where: CarWhereInput): CarConnection!
+  me: User
 }

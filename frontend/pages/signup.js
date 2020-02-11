@@ -1,8 +1,12 @@
 import SignUp from '../components/SignUp';
+import SignIn from '../components/SignIn';
 
 const SignupPage = () => {
   return (
-    <SignUp />
+    <div>
+      <SignUp />
+      <SignIn />
+    </div>
   )
 }
 

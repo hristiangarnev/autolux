@@ -59,57 +59,58 @@ class UpdateCar extends Component {
             if(loading) return <Loading />
             if(!data.car) return <p>No car found</p>
             return (
-              <Loading />
-              // <Mutation mutation={UPDATE_CAR_MUTATION} variables={this.state}>
-              //   {(updateCar, { loading, error}) => (
-              //     <form onSubmit={e => this.updateCar(e, updateCar)}>
-              //       <fieldset disabled={loading}>
-              //         <label htmlFor="title">
-              //           Title
-              //           <input
-              //             type="text"
-              //             id="title"
-              //             name="title"
-              //             placeholder="Title"
-              //             required
-              //             defaultValue={data.car.title}
-              //             onChange={this.handleChange}
-              //           />
-              //         </label>
+              <div>
+                <Mutation mutation={UPDATE_CAR_MUTATION} variables={this.state}>
+                  {(updateCar, { loading, error}) => (
+                    <form onSubmit={e => this.updateCar(e, updateCar)}>
+                      <fieldset disabled={loading}>
+                        <label htmlFor="title">
+                          Title
+                          <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                            required
+                            defaultValue={data.car.title}
+                            onChange={this.handleChange}
+                          />
+                        </label>
 
-              //         <label htmlFor="price">
-              //           Price
-              //           <input
-              //             type="number"
-              //             id="price"
-              //             name="price"
-              //             placeholder="Price"
-              //             required
-              //             defaultValue={data.car.price}
-              //             onChange={this.handleChange}
-              //           />
-              //         </label>
+                        <label htmlFor="price">
+                          Price
+                          <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            placeholder="Price"
+                            required
+                            defaultValue={data.car.price}
+                            onChange={this.handleChange}
+                          />
+                        </label>
 
-              //         <label htmlFor="description">
-              //           Description
-              //           <textarea
-              //             id="description"
-              //             name="description"
-              //             placeholder="Description"
-              //             required
-              //             defaultValue={data.car.description}
-              //             onChange={this.handleChange}
-              //           ></textarea>
-              //         </label>
+                        <label htmlFor="description">
+                          Description
+                          <textarea
+                            id="description"
+                            name="description"
+                            placeholder="Description"
+                            required
+                            defaultValue={data.car.description}
+                            onChange={this.handleChange}
+                          ></textarea>
+                        </label>
 
-              //         <button type="submit">Sav{loading ? 'ing' : 'e'} changes</button>
-              //       </fieldset>
-              //     </form>
-              //   )}
-              // </Mutation>
-              )
-            }}
-          </Query>
+                        <button type="submit">Sav{loading ? 'ing' : 'e'} changes</button>
+                      </fieldset>
+                    </form>
+                  )}
+                </Mutation>
+              </div>
+            )
+          }}
+        </Query>
       </div>
     );
   }

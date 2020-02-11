@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from "next/router";
+import { withRouter } from 'next/router';
 import SingleCar from '../components/SingleCar';
 import Loading from '../components/Loading';
 
