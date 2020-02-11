@@ -16,7 +16,6 @@ const SIGN_IN_MUTATION = gql`
 class SignIn extends Component {
   state = {
     password: '',
-    name: '',
     email: ''
   }
   saveToState = (e) => {
@@ -31,7 +30,7 @@ class SignIn extends Component {
             onSubmit={async (e) => {
               e.preventDefault();
               await signin();
-              this.setState({ name: '', password: '', email: ''});
+              this.setState({ password: '', email: ''});
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>

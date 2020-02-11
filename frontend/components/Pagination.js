@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Link from 'next/link';
 import { perPage } from '../config';
+import Loading from './Loading';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {

@@ -30,7 +30,6 @@ class Cars extends Component {
     return (
       <div className="home">
         <h1>Featured cars</h1>
-        <Pagination page={this.props.page} />
         <Query
           query={ALL_CARS_QUERY}
           variables={{
@@ -38,7 +37,7 @@ class Cars extends Component {
           }}
         >
           {({data, error, loading}) => {
-            if(loading) return <Loading />
+            if(loading) return <Loading />;
             if(error) return <p>Error... {error.message}</p>
             return (
               <CarList>

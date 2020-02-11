@@ -4,8 +4,6 @@ import SingleCar from '../components/SingleCar';
 import Loading from '../components/Loading';
 
 const car = withRouter(({ router }) => {
-  if(!router.query.id) return <Loading />
-
   return (
     <SingleCar id={router.query.id} />
   );
