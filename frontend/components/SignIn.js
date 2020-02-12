@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Error from '../components/Error';
+import { CURRENT_USER_QUERY } from './User';
 
 const SIGN_IN_MUTATION = gql`
   mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
@@ -23,7 +24,13 @@ class SignIn extends Component {
   }
   render() {
     return (
-      <Mutation mutation={SIGN_IN_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={SIGN_IN_MUTATION}
+        variables={this.state}
+        refetchQueries={[{
+          query: CURRENT_USER_QUERY
+        }]}
+      >
         {(signin, { error, loading }) => (
           <form
             method="post"
@@ -34,7 +41,7 @@ class SignIn extends Component {
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>
-              <h2>Sign up</h2>
+              <h2>Sign In</h2>
               <Error error={error} />
               <label htmlFor="email">
                 Email

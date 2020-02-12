@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import User from './User';
+import SignOut from './SignOut';
 
 const NavElement = styled.nav`
   display: flex;
@@ -18,31 +19,51 @@ const NavElement = styled.nav`
 `;
 
 const Nav = () => (
-  <NavElement>
-    <User>
-      {({data: { me } }) => {
-        if(me) {
-          return <p>{me.name}</p>;
-        }
-        return null;
-      }}
-    </User>
-    <Link href="/">
-      <a>
-        Home
-      </a>
-    </Link>
-    <Link href="/search">
-      <a>
-        Search
-      </a>
-    </Link>
-    <Link href="/contact">
-      <a>
-        Contact
-      </a>
-    </Link>
-  </NavElement>
+  <User>
+    {({data: { me } }) => (
+      <NavElement>
+        { me &&  (
+          <>
+            <Link href="/account">
+              <a>
+                Account
+              </a>
+            </Link>
+            <SignOut />
+          </>
+        )}
+        <Link href="/">
+          <a>
+            Home
+          </a>
+        </Link>
+        <Link href="/search">
+          <a>
+            Search
+          </a>
+        </Link>
+        <Link href="/contact">
+          <a>
+            Contact
+          </a>
+        </Link>
+        { !me && (
+          <>
+            <Link href="/signup">
+              <a>
+                Sign Up
+              </a>
+            </Link>
+            <Link href="/signin">
+              <a>
+                Sign In
+              </a>
+            </Link>
+          </>
+        )}
+      </NavElement>
+    )}
+  </User>
 )
 
 export default Nav;

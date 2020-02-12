@@ -1,13 +1,9 @@
 import SignUp from '../components/SignUp';
-import SignIn from '../components/SignIn';
 
-const SignupPage = () => {
+const SignUpPage = () => {
   return (
-    <div>
-      <SignUp />
-      <SignIn />
-    </div>
+    <SignUp />
   )
 }
 
-export default SignupPage;
+export default SignUpPage;
