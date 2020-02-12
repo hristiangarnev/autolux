@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 const LogoElement = styled.div`
+  max-width: 200px;
+
   a {
-    display: flex;
-    max-width: 200px;
-  
     img {
       max-width: 100%;
     }
