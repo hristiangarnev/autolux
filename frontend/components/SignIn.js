@@ -8,12 +8,16 @@ import styled from 'styled-components';
 const Form = styled.form`
   max-width: 960px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
 
   fieldset {
     border: none;
 
     label {
+      display: block;
       font-size: 16px;
+      margin: 10px 0;
 
       input {
         display: block;
@@ -21,11 +25,18 @@ const Form = styled.form`
         background: #fff;
         font-size: 16px;
         padding: 5px;
+        margin: 5px 0;
       }
     }
 
     button {
-      margin: 0 auto;
+      display: block;
+      margin: 10px 0;
+      background: orange;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
     }
   }
 `;
@@ -72,6 +83,7 @@ class SignIn extends Component {
               <label htmlFor="email">
                 Email
                 <input
+                  id="email"
                   type="email"
                   name="email"
                   placeholder="Email"
@@ -82,6 +94,7 @@ class SignIn extends Component {
               <label htmlFor="password">
                 Password
                 <input
+                  id="password"
                   name="password"
                   type="password"
                   placeholder="Password"
@@ -89,7 +102,7 @@ class SignIn extends Component {
                   onChange={this.saveToState}
                 />
               </label>
-              <button type="submit">Sign up</button>
+              <button type="submit">Sign In</button>
             </fieldset>
           </Form>
         )}

@@ -40,6 +40,10 @@ injectGlobal`
   .loading {
     max-width: 960px;
     margin: 0 auto;
+
+    h1 {
+      text-align: center;
+    }
   }
 
   a {

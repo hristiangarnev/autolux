@@ -29,7 +29,7 @@ class Cars extends Component {
   render() {
     return (
       <div className="home">
-        <h1>Featured cars</h1>
+        <h1>Last added cars</h1>
         <Query
           query={ALL_CARS_QUERY}
           variables={{
