@@ -49,11 +49,6 @@ const Nav = () => (
         </Link>
         { !me && (
           <>
-            <Link href="/signup">
-              <a>
-                Sign Up
-              </a>
-            </Link>
             <Link href="/signin">
               <a>
                 Sign In

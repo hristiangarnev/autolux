@@ -3,6 +3,32 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Error from '../components/Error';
 import { CURRENT_USER_QUERY } from './User';
+import styled from 'styled-components';
+
+const Form = styled.form`
+  max-width: 960px;
+  margin: 0 auto;
+
+  fieldset {
+    border: none;
+
+    label {
+      font-size: 16px;
+
+      input {
+        display: block;
+        border: 1px solid #ccc;
+        background: #fff;
+        font-size: 16px;
+        padding: 5px;
+      }
+    }
+
+    button {
+      margin: 0 auto;
+    }
+  }
+`;
 
 const SIGN_IN_MUTATION = gql`
   mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
@@ -32,7 +58,7 @@ class SignIn extends Component {
         }]}
       >
         {(signin, { error, loading }) => (
-          <form
+          <Form
             method="post"
             onSubmit={async (e) => {
               e.preventDefault();
@@ -65,7 +91,7 @@ class SignIn extends Component {
               </label>
               <button type="submit">Sign up</button>
             </fieldset>
-          </form>
+          </Form>
         )}
       </Mutation>
     )
