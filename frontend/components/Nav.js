@@ -10,11 +10,15 @@ const NavElement = styled.nav`
   align-items: center;
   justify-content: flex-end;
 
-  > a {
+  > a,
+  > button {
     display: flex;
     font-size: 15px;
     line-height: 1.2;
     padding: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
   }
 `;
 
@@ -22,16 +26,6 @@ const Nav = () => (
   <User>
     {({data: { me } }) => (
       <NavElement>
-        { me &&  (
-          <>
-            <Link href="/account">
-              <a>
-                Account
-              </a>
-            </Link>
-            <SignOut />
-          </>
-        )}
         <Link href="/">
           <a>
             Home
@@ -47,6 +41,16 @@ const Nav = () => (
             Contact
           </a>
         </Link>
+        { me && (
+          <>
+            <Link href="/account">
+              <a>
+                Account
+              </a>
+            </Link>
+            <SignOut />
+          </>
+        )}
         { !me && (
           <>
             <Link href="/signin">

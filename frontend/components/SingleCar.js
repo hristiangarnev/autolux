@@ -8,6 +8,23 @@ import Loading from './Loading';
 const SingleCarElement = styled.div`
   max-width: 960px;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+
+  h2 {
+    display: flex;
+    flex: 1;
+  }
+
+  .images,
+  .info {
+    display: flex;
+    flex-basis: 50%;
+
+    img {
+      max-width: 100%;
+    }
+  }
 `;
 
 const SINGLE_CAR_QUERY = gql`
@@ -39,8 +56,13 @@ class SingleCar extends Component {
                 <title>{car.title} | AutoLux</title>
               </Head>
               <h2>{car.title}</h2>
-              <img src={car.largeImage} />
-              <span>{car.price}</span>
+              <div className="images">
+                <img src={car.largeImage} />
+              </div>
+              <div className="info">
+                <span>{car.price}</span>
+                <p>{car.description}</p>
+              </div>
             </SingleCarElement>
           )
         }}

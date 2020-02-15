@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styled from 'styled-components';
 import DeleteCar from './DeleteCar';
+import User from './User';
 
 const CarItem = styled.div`
   flex: 0 0 33.3333%;
@@ -11,7 +12,7 @@ const CarItem = styled.div`
   .car-holder {
     background: #fff;
     display: block;
-    margin: 5px;
+    margin: 0 5px;
     border: 1px solid #dedede;
     border-radius: 3px;
 
@@ -40,6 +41,28 @@ const CarItem = styled.div`
       transform: scale(1.05);
     }
   }
+
+  .car-buttons {
+    display: flex;
+    margin: 0 5px;
+
+    a, button {
+      display: flex;
+      flex: 1;
+      font-size: 15px;
+      border: none;
+      padding: 5px;
+      color: #fff;
+    }
+
+    a {
+      background: green;
+    }
+
+    button {
+      background: red;
+    }
+  }
 `;
 
 export default class Car extends Component {
@@ -62,13 +85,21 @@ export default class Car extends Component {
             <span>{car.price}</span>
           </a>
         </Link>
-        <Link href={{
-          pathname: '/update',
-          query: { id: car.id }
-        }}>
-          <a>Update</a>
-        </Link>
-        <DeleteCar id={car.id}>Delete</DeleteCar>
+        <User>
+          {({data: { me } }) => (
+            me && (
+              <div className="car-buttons">
+                <Link href={{
+                  pathname: '/update',
+                  query: { id: car.id }
+                }}>
+                  <a>Update</a>
+                </Link>
+                <DeleteCar id={car.id}>Delete</DeleteCar>
+              </div>
+            )
+          )}
+        </User>
       </CarItem>
     )
   }
