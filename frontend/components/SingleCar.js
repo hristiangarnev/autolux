@@ -13,17 +13,32 @@ const SingleCarElement = styled.div`
 
   h2 {
     display: flex;
-    flex: 1;
+    flex-basis: 100%;
   }
 
   .images,
   .info {
     display: flex;
-    flex-basis: 50%;
+  }
+
+  .images {
+    flex-basis: 70%;
 
     img {
       max-width: 100%;
     }
+  }
+
+  .info {
+    flex-basis: calc(30% - 10px);
+    margin: 0 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .description {
+    display: flex;
+    flex-basis: 100%;
   }
 `;
 
@@ -59,8 +74,10 @@ class SingleCar extends Component {
               <div className="images">
                 <img src={car.largeImage} />
               </div>
-              <div className="info">
-                <span>{car.price}</span>
+              <aside className="info">
+                <p>Price: {car.price}</p>
+              </aside>
+              <div className="description">
                 <p>{car.description}</p>
               </div>
             </SingleCarElement>

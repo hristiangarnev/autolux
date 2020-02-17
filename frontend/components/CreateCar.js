@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import Router from 'next/router';
 import gql from 'graphql-tag'
+import styled from 'styled-components';
+import cars from '../../backend/src/constants/cars';
 
 const CREATE_CAR_MUTATION = gql`
   mutation CREATE_CAR_MUTATION(
@@ -23,13 +25,20 @@ const CREATE_CAR_MUTATION = gql`
   }
 `;
 
+const SellForm = styled.form`
+  label {
+    display: flex;
+  }
+`;
+
 class CreateCar extends Component {
   state = {
     title: '',
     description: '',
     image: '',
     largeImage: '',
-    price: 0
+    price: 0,
+    make: ''
   };
 
   uploadFile = async e => {
@@ -65,7 +74,7 @@ class CreateCar extends Component {
         <h2>Sell a car</h2>
         <Mutation mutation={CREATE_CAR_MUTATION} variables={this.state}>
           {(createCar, { loading, error}) => (
-            <form action="" onSubmit={async (e) => {
+            <SellForm action="" onSubmit={async (e) => {
                 e.preventDefault();
                 const res = await createCar();
 
@@ -102,7 +111,6 @@ class CreateCar extends Component {
                   {this.state.image && <img src={this.state.image} alt="Upload preview" />}
                 </label>
 
-
                 <label htmlFor="price">
                   Price
                   <input
@@ -128,9 +136,39 @@ class CreateCar extends Component {
                   ></textarea>
                 </label>
 
+                <label htmlFor="make">
+                  Make
+                  <select
+                    id="make"
+                    name="make"
+                    required
+                    value={this.state.make}
+                    onChange={this.handleChange}
+                  >
+                    {Object.entries(cars).map((car, index) => (
+                      <option key={index}>{car[0]}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <label htmlFor="model">
+                  Model
+                  <select
+                    id="model"
+                    name="model"
+                    required
+                    value={this.state.model}
+                    onChange={this.handleChange}
+                  >
+                    {cars[this.state.make].map((model, index) => (
+                      <option key={index}>{model}</option>
+                    ))}
+                  </select>
+                </label>
+
                 <button type="submit">Submit</button>
               </fieldset>
-            </form>
+            </SellForm>
           )}
         </Mutation>
       </div>

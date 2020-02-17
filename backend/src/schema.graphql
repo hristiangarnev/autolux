@@ -5,7 +5,25 @@ type SuccessMessage {
 }
 
 type Mutation {
-  createCar(title: String, description: String, price: Int, image: String, largeImage: String): Car!
+  createCar(
+    title: String,
+    model: String,
+    description: String,
+    price: Int,
+    image: String,
+    largeImage: String,
+    mileage: Int,
+    fuelType: String,
+    transmission: String,
+    year: Int,
+    numOfGears: Int,
+    bodyType: String,
+    numOfDoors: Int,
+    power: Int,
+    color: String,
+    engine: String,
+    driveWheel: String
+  ): Car!
   updateCar(id: ID!, title: String, description: String, price: Int): Car!
   deleteCar(id: ID!): Car
   signup(email: String!, password: String!, name: String!): User!
