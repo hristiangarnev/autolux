@@ -4,6 +4,8 @@ import gql from 'graphql-tag';
 import Error from '../components/Error';
 import { CURRENT_USER_QUERY } from './User';
 import styled from 'styled-components';
+import Link from 'next/link';
+import Head from 'next/head';
 
 const Form = styled.form`
   max-width: 960px;
@@ -69,42 +71,50 @@ class SignIn extends Component {
         }]}
       >
         {(signin, { error, loading }) => (
-          <Form
-            method="post"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              await signin();
-              this.setState({ password: '', email: ''});
-            }}
-          >
-            <fieldset disabled={loading} aria-busy={loading}>
-              <h2>Sign In</h2>
-              <Error error={error} />
-              <label htmlFor="email">
-                Email
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={this.state.email}
-                  onChange={this.saveToState}
-                />
-              </label>
-              <label htmlFor="password">
-                Password
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.saveToState}
-                />
-              </label>
-              <button type="submit">Sign In</button>
-            </fieldset>
-          </Form>
+          <>
+            <Head>
+              <title>Sign In | AutoLux</title>
+            </Head>
+            <Form
+              method="post"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                await signin();
+                this.setState({ password: '', email: ''});
+              }}
+            >
+              <fieldset disabled={loading} aria-busy={loading}>
+                <h2>Sign In</h2>
+                <Error error={error} />
+                <label htmlFor="email">
+                  Email
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={this.state.email}
+                    onChange={this.saveToState}
+                  />
+                </label>
+                <label htmlFor="password">
+                  Password
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={this.saveToState}
+                  />
+                </label>
+                <button type="submit">Sign In</button>
+                <Link href="/request-reset">
+                  <a>Forgot password?</a>
+                </Link>
+              </fieldset>
+            </Form>
+          </>
         )}
       </Mutation>
     )

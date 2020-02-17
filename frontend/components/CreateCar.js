@@ -45,7 +45,7 @@ class CreateCar extends Component {
     });
 
     const file = await res.json();
-    console.log(file);
+
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url
@@ -102,7 +102,7 @@ class CreateCar extends Component {
                   {this.state.image && <img src={this.state.image} alt="Upload preview" />}
                 </label>
 
-                
+
                 <label htmlFor="price">
                   Price
                   <input
