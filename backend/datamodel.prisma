@@ -24,18 +24,19 @@ type Car {
   image: String!
   largeImage: String!
   price: Int!
-  model: String!,
-  mileage: Int!,
-  fuelType: String!,
-  transmission: String!,
-  year: Int!,
-  numOfGears: Int!,
-  bodyType: String!,
-  numOfDoors: Int!,
-  power: Int!,
-  color: String!,
-  engine: String!,
-  driveWheel: String!,
+  make: String!
+  model: String!
+  mileage: Int!
+  fuelType: String!
+  transmission: String!
+  year: Int!
+  numOfGears: Int!
+  bodyType: String!
+  numOfDoors: Int!
+  power: Int!
+  color: String!
+  engine: String!
+  driveWheel: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
