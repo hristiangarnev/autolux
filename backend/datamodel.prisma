@@ -27,7 +27,6 @@ type Car {
   make: String!
   model: String!
   mileage: Int!
-  fuelType: String!
   transmission: String!
   year: Int!
   numOfGears: Int!

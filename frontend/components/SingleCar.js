@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import Head from 'next/head';
-import styled from 'styled-components';
-import Loading from './Loading';
+import React, { Component } from "react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+import Head from "next/head";
+import styled from "styled-components";
+import Loading from "./Loading";
 
 const SingleCarElement = styled.div`
   max-width: 960px;
@@ -26,10 +26,12 @@ const SingleCarElement = styled.div`
 
     img {
       max-width: 100%;
+      object-fit: contain;
     }
   }
 
   .info {
+    flex-direction: column;
     flex-basis: calc(30% - 10px);
     margin: 0 5px;
     padding: 10px;
@@ -47,9 +49,22 @@ const SINGLE_CAR_QUERY = gql`
     car(where: { id: $id }) {
       id
       title
+      make
+      model
       description
-      largeImage
       price
+      image
+      largeImage
+      mileage
+      transmission
+      year
+      numOfGears
+      bodyType
+      numOfDoors
+      power
+      color
+      engine
+      driveWheel
     }
   }
 `;
@@ -58,13 +73,14 @@ class SingleCar extends Component {
   render() {
     return (
       <Query query={SINGLE_CAR_QUERY} variables={{ id: this.props.id }}>
-        {({data, error, loading}) => {
-          if(loading) return <Loading />
-          if(!data.car) return <div>Error! No car with id {this.props.id} found!</div>
-          if(error) return <p>Error... {error.message}</p>
-          
+        {({ data, error, loading }) => {
+          if (loading) return <Loading />;
+          if (!data.car)
+            return <div>Error! No car with id {this.props.id} found!</div>;
+          if (error) return <p>Error... {error.message}</p>;
+
           const car = data.car;
-          
+
           return (
             <SingleCarElement>
               <Head>
@@ -75,13 +91,24 @@ class SingleCar extends Component {
                 <img src={car.largeImage} />
               </div>
               <aside className="info">
-                <p>Price: {car.price}</p>
+                <span>Make: {car.make}</span>
+                <span>Model: {car.model}</span>
+                <span>Price: {car.price}</span>
+                <span>Mileage: {car.mileage}</span>
+                <span>Engine: {car.engine}</span>
+                <span>Transmission: {car.transmission}</span>
+                <span>Year: {car.year}</span>
+                <span>Num Of Gears: {car.numOfGears}</span>
+                <span>Power: {car.power}</span>
+                <span>Color: {car.color}</span>
+                <span>Engine: {car.engine}</span>
+                <span>Drive Wheel: {car.driveWheel}</span>
               </aside>
               <div className="description">
                 <p>{car.description}</p>
               </div>
             </SingleCarElement>
-          )
+          );
         }}
       </Query>
     );

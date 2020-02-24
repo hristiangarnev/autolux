@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/hristian-garnev/autolux/dev
-# timestamp: Tue Feb 18 2020 15:48:03 GMT+0200 (Eastern European Standard Time)
+# timestamp: Mon Feb 24 2020 10:08:04 GMT+0200 (Eastern European Standard Time)
 
 type AggregateCar {
   count: Int!
@@ -24,7 +24,6 @@ type Car implements Node {
   make: String!
   model: String!
   mileage: Int!
-  fuelType: String!
   transmission: String!
   year: Int!
   numOfGears: Int!
@@ -58,7 +57,6 @@ input CarCreateInput {
   make: String!
   model: String!
   mileage: Int!
-  fuelType: String!
   transmission: String!
   year: Int!
   numOfGears: Int!
@@ -98,8 +96,6 @@ enum CarOrderByInput {
   model_DESC
   mileage_ASC
   mileage_DESC
-  fuelType_ASC
-  fuelType_DESC
   transmission_ASC
   transmission_DESC
   year_ASC
@@ -134,7 +130,6 @@ type CarPreviousValues {
   make: String!
   model: String!
   mileage: Int!
-  fuelType: String!
   transmission: String!
   year: Int!
   numOfGears: Int!
@@ -196,7 +191,6 @@ input CarUpdateInput {
   make: String
   model: String
   mileage: Int
-  fuelType: String
   transmission: String
   year: Int
   numOfGears: Int
@@ -217,7 +211,6 @@ input CarUpdateManyMutationInput {
   make: String
   model: String
   mileage: Int
-  fuelType: String
   transmission: String
   year: Int
   numOfGears: Int
@@ -562,46 +555,6 @@ input CarWhereInput {
 
   """All values greater than or equal the given value."""
   mileage_gte: Int
-  fuelType: String
-
-  """All values that are not equal to given value."""
-  fuelType_not: String
-
-  """All values that are contained in given list."""
-  fuelType_in: [String!]
-
-  """All values that are not contained in given list."""
-  fuelType_not_in: [String!]
-
-  """All values less than the given value."""
-  fuelType_lt: String
-
-  """All values less than or equal the given value."""
-  fuelType_lte: String
-
-  """All values greater than the given value."""
-  fuelType_gt: String
-
-  """All values greater than or equal the given value."""
-  fuelType_gte: String
-
-  """All values containing the given string."""
-  fuelType_contains: String
-
-  """All values not containing the given string."""
-  fuelType_not_contains: String
-
-  """All values starting with the given string."""
-  fuelType_starts_with: String
-
-  """All values not starting with the given string."""
-  fuelType_not_starts_with: String
-
-  """All values ending with the given string."""
-  fuelType_ends_with: String
-
-  """All values not ending with the given string."""
-  fuelType_not_ends_with: String
   transmission: String
 
   """All values that are not equal to given value."""

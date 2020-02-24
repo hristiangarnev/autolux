@@ -6,36 +6,61 @@ type SuccessMessage {
 
 type Mutation {
   createCar(
-    title: String,
-    make: String,
-    model: String,
-    description: String,
-    price: Int,
-    image: String,
-    largeImage: String,
-    mileage: Int,
-    fuelType: String,
-    transmission: String,
-    year: Int,
-    numOfGears: Int,
-    bodyType: String,
-    numOfDoors: Int,
-    power: Int,
-    color: String,
-    engine: String,
+    title: String
+    make: String
+    model: String
+    description: String
+    price: Int
+    image: String
+    largeImage: String
+    mileage: Int
+    transmission: String
+    year: Int
+    numOfGears: Int
+    bodyType: String
+    numOfDoors: Int
+    power: Int
+    color: String
+    engine: String
     driveWheel: String
   ): Car!
-  updateCar(id: ID!, title: String, description: String, price: Int): Car!
+  updateCar(
+    id: ID!
+    title: String
+    make: String
+    model: String
+    description: String
+    price: Int
+    mileage: Int
+    transmission: String
+    year: Int
+    numOfGears: Int
+    bodyType: String
+    numOfDoors: Int
+    power: Int
+    color: String
+    engine: String
+    driveWheel: String
+  ): Car!
   deleteCar(id: ID!): Car
   signup(email: String!, password: String!, name: String!): User!
   signin(email: String!, password: String!): User!
-  signout: SuccessMessage,
-  requestReset(email: String!): SuccessMessage,
-  resetPassword(resetToken: String!, newPassword: String!, confirmPassword: String!): User!
+  signout: SuccessMessage
+  requestReset(email: String!): SuccessMessage
+  resetPassword(
+    resetToken: String!
+    newPassword: String!
+    confirmPassword: String!
+  ): User!
 }
 
 type Query {
-  cars(where: CarWhereInput, orderBy: CarOrderByInput, skip: Int, first: Int): [Car]!
+  cars(
+    where: CarWhereInput
+    orderBy: CarOrderByInput
+    skip: Int
+    first: Int
+  ): [Car]!
   car(where: CarWhereUniqueInput!): Car
   carsConnection(where: CarWhereInput): CarConnection!
   me: User

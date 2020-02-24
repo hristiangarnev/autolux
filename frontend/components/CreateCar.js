@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import Router from 'next/router';
-import gql from 'graphql-tag'
-import styled from 'styled-components';
-import cars from '../../backend/src/constants/cars';
-import colors from '../../backend/src/constants/colors';
+import React, { Component } from "react";
+import { Mutation } from "react-apollo";
+import Router from "next/router";
+import gql from "graphql-tag";
+import styled from "styled-components";
+import cars from "../../backend/src/constants/cars";
+import colors from "../../backend/src/constants/colors";
 
 const CREATE_CAR_MUTATION = gql`
   mutation CREATE_CAR_MUTATION(
     $title: String!
+    $make: String!
+    $model: String!
     $description: String!
     $price: Int!
     $image: String
     $largeImage: String
-    $price: Int!
-    $make: String!
-    $model: String!
     $mileage: Int!
-    $fuelType: String!
     $transmission: String!
     $year: Int!
     $numOfGears: Int!
     $bodyType: String!
+    $numOfDoors: Int!
     $power: Int!
     $color: String!
     $engine: String!
@@ -29,19 +28,18 @@ const CREATE_CAR_MUTATION = gql`
   ) {
     createCar(
       title: $title
+      make: $make
+      model: $model
       description: $description
       price: $price
       image: $image
       largeImage: $largeImage
-      price: $price
-      make: $make
-      model: $model
       mileage: $mileage
-      fuelType: $fuelType
       transmission: $transmission
       year: $year
       numOfGears: $numOfGears
       bodyType: $bodyType
+      numOfDoors: $numOfDoors
       power: $power
       color: $color
       engine: $engine
@@ -60,48 +58,57 @@ const SellForm = styled.form`
 
 class CreateCar extends Component {
   state = {
-    title: '',
-    description: '',
-    image: '',
-    largeImage: '',
+    title: "",
+    make: "",
+    model: "",
+    description: "",
     price: 0,
-    make: '',
-    model: '',
+    image: "",
+    largeImage: "",
     mileage: 0,
-    fuelType: '',
-    transmission: '',
+    transmission: "",
     year: 0,
-    numOfGears: '',
-    bodyType: '',
+    numOfGears: "",
+    bodyType: "",
+    numOfDoors: 0,
     power: 0,
-    color: '',
-    engine: '',
-    driveWheel: ''
+    color: "",
+    engine: "",
+    driveWheel: ""
   };
 
   uploadFile = async e => {
     const files = e.target.files;
     const data = new FormData();
 
-    data.append('file', files[0]);
-    data.append('upload_preset', 'autolux');
+    data.append("file", files[0]);
+    data.append("upload_preset", "autolux");
 
-    const res = await fetch('https://api.cloudinary.com/v1_1/hristiangarnev/image/upload', {
-      method: 'POST',
-      body: data
-    });
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/hristiangarnev/image/upload",
+      {
+        method: "POST",
+        body: data
+      }
+    );
 
     const file = await res.json();
 
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url
-    })
-  }
+    });
+  };
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { name, type, value } = e.target;
-    const val = type === 'number' ? parseFloat(value) : value;
+    const val =
+      type === "number" ||
+      name === "year" ||
+      name === "numOfGears" ||
+      name === "numOfDoors"
+        ? parseFloat(value)
+        : value;
 
     this.setState({ [name]: val });
   };
@@ -109,21 +116,23 @@ class CreateCar extends Component {
   render() {
     const years = [];
 
-    for(let i = 1900; i <= (new Date()).getFullYear(); i++) {
+    for (let i = 1900; i <= new Date().getFullYear(); i++) {
       years.push(i);
     }
 
     return (
-      <div>
+      <>
         <h2>Sell a car</h2>
         <Mutation mutation={CREATE_CAR_MUTATION} variables={this.state}>
-          {(createCar, { loading, error}) => (
-            <SellForm action="" onSubmit={async (e) => {
+          {(createCar, { loading, error }) => (
+            <SellForm
+              action=""
+              onSubmit={async e => {
                 e.preventDefault();
                 const res = await createCar();
 
                 Router.push({
-                  pathname: '/car',
+                  pathname: "/car",
                   query: { id: res.data.createCar.id }
                 });
               }}
@@ -142,17 +151,50 @@ class CreateCar extends Component {
                   />
                 </label>
 
-                <label htmlFor="file">
-                  Image
-                  <input
-                    type="file"
-                    id="file"
-                    name="file"
-                    placeholder="Upload an image"
+                <label htmlFor="make">
+                  Make
+                  <select
+                    id="make"
+                    name="make"
                     required
-                    onChange={this.uploadFile}
-                  />
-                  {this.state.image && <img src={this.state.image} alt="Upload preview" />}
+                    value={this.state.make}
+                    onChange={this.handleChange}
+                  >
+                    {Object.entries(cars).map(car => (
+                      <option key={car} value={car[0]}>
+                        {car[0]}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label htmlFor="model">
+                  Model
+                  <select
+                    id="model"
+                    name="model"
+                    required
+                    value={this.state.model}
+                    onChange={this.handleChange}
+                  >
+                    {cars[this.state.make].map(model => (
+                      <option key={model} value={model}>
+                        {model}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label htmlFor="description">
+                  Description
+                  <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Description"
+                    required
+                    value={this.state.description}
+                    onChange={this.handleChange}
+                  ></textarea>
                 </label>
 
                 <label htmlFor="price">
@@ -168,46 +210,19 @@ class CreateCar extends Component {
                   />
                 </label>
 
-                <label htmlFor="description">
-                  Description
-                  <textarea
-                    id="description"
-                    name="description"
-                    placeholder="Description"
+                <label htmlFor="file">
+                  Image
+                  <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    placeholder="Upload an image"
                     required
-                    value={this.state.description}
-                    onChange={this.handleChange}
-                  ></textarea>
-                </label>
-
-                <label htmlFor="make">
-                  Make
-                  <select
-                    id="make"
-                    name="make"
-                    required
-                    value={this.state.make}
-                    onChange={this.handleChange}
-                  >
-                    {Object.entries(cars).map((car, index) => (
-                      <option key={index} value={car[0]}>{car[0]}</option>
-                    ))}
-                  </select>
-                </label>
-
-                <label htmlFor="model">
-                  Model
-                  <select
-                    id="model"
-                    name="model"
-                    required
-                    value={this.state.model}
-                    onChange={this.handleChange}
-                  >
-                    {cars[this.state.make].map((model, index) => (
-                      <option key={index} value={model}>{model}</option>
-                    ))}
-                  </select>
+                    onChange={this.uploadFile}
+                  />
+                  {this.state.image && (
+                    <img src={this.state.image} alt="Upload preview" />
+                  )}
                 </label>
 
                 <label htmlFor="mileage">
@@ -221,23 +236,6 @@ class CreateCar extends Component {
                     value={this.state.mileage}
                     onChange={this.handleChange}
                   />
-                </label>
-
-                <label htmlFor="fuelType">
-                  Fuel Type
-                  <select
-                    id="fuelType"
-                    name="fuelType"
-                    required
-                    value={this.state.fuelType}
-                    onChange={this.handleChange}
-                  >
-                    <option value="gasoline">Gasoline</option>
-                    <option value="diesel">Diesel</option>
-                    <option value="petrol">Petrol</option>
-                    <option value="hybrid">Hybrid</option>
-                    <option value="electric">Electric</option>
-                  </select>
                 </label>
 
                 <label htmlFor="transmission">
@@ -264,7 +262,9 @@ class CreateCar extends Component {
                     onChange={this.handleChange}
                   >
                     {years.map(year => (
-                      <option value={year}>{year}</option>
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
                     ))}
                   </select>
                 </label>
@@ -307,6 +307,21 @@ class CreateCar extends Component {
                   </select>
                 </label>
 
+                <label htmlFor="numOfDoors">
+                  Num Of Doors
+                  <select
+                    id="numOfDoors"
+                    name="numOfDoors"
+                    required
+                    value={this.state.numOfDoors}
+                    onChange={this.handleChange}
+                  >
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </label>
+
                 <label htmlFor="power">
                   Power
                   <input
@@ -320,25 +335,6 @@ class CreateCar extends Component {
                   />
                 </label>
 
-                <label htmlFor="bodyType">
-                  Body Type
-                  <select
-                    id="bodyType"
-                    name="bodyType"
-                    required
-                    value={this.state.bodyType}
-                    onChange={this.handleChange}
-                  >
-                    <option value="sedan">Sedan</option>
-                    <option value="hatchback">Hatchback</option>
-                    <option value="mpv">MPV</option>
-                    <option value="suv">SUV</option>
-                    <option value="crossover">Crossover</option>
-                    <option value="coupe">Coupe</option>
-                    <option value="convertible">Convertible</option>
-                  </select>
-                </label>
-
                 <label htmlFor="color">
                   Color
                   <select
@@ -348,9 +344,27 @@ class CreateCar extends Component {
                     value={this.state.color}
                     onChange={this.handleChange}
                   >
-                    {colors.map((color, index) => (
-                      <option key={index} value={color}>{color}</option>
+                    {colors.map(color => (
+                      <option key={color} value={color}>
+                        {color}
+                      </option>
                     ))}
+                  </select>
+                </label>
+
+                <label htmlFor="engine">
+                  Engine
+                  <select
+                    id="engine"
+                    name="engine"
+                    required
+                    value={this.state.engine}
+                    onChange={this.handleChange}
+                  >
+                    <option value="electric">Electric</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="petrol">Petrol</option>
+                    <option value="gasoline">Gasoline</option>
                   </select>
                 </label>
 
@@ -370,13 +384,12 @@ class CreateCar extends Component {
                   </select>
                 </label>
 
-
                 <button type="submit">Submit</button>
               </fieldset>
             </SellForm>
           )}
         </Mutation>
-      </div>
+      </>
     );
   }
 }
