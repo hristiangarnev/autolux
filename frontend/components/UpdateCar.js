@@ -3,8 +3,7 @@ import { Mutation, Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import Loading from "./Loading";
-import cars from "../../backend/src/constants/cars";
-import colors from "../../backend/src/constants/colors";
+import { cars, colors } from "../../backend/src/constants/cars";
 
 const SINGLE_CAR_QUERY = gql`
   query SINGLE_CAR_QUERY($id: ID!) {
@@ -120,7 +119,7 @@ class UpdateCar extends Component {
     }
     return (
       <div className="car-update">
-        <h2>Update a car</h2>
+        <h2>Update A Car</h2>
         <Query query={SINGLE_CAR_QUERY} variables={{ id: this.props.id }}>
           {({ data, loading }) => {
             if (loading) return <Loading />;

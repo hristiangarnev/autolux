@@ -1,9 +1,5 @@
-import CreateCar from '../components/CreateCar';
+import CreateCar from "../components/CreateCar";
 
-const Sell = () => (
-  <div>
-    <CreateCar />
-  </div>
-)
+const Sell = () => <CreateCar />;
 
 export default Sell;

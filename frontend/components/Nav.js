@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import Link from 'next/link';
-import styled from 'styled-components';
-import User from './User';
-import SignOut from './SignOut';
+import React, { Component } from "react";
+import Link from "next/link";
+import styled from "styled-components";
+import User from "./User";
+import SignOut from "./SignOut";
 
 const NavElement = styled.nav`
   display: flex;
@@ -24,45 +24,38 @@ const NavElement = styled.nav`
 
 const Nav = () => (
   <User>
-    {({data: { me } }) => (
+    {({ data: { me } }) => (
       <NavElement>
         <Link href="/">
-          <a>
-            Home
-          </a>
+          <a>Home</a>
         </Link>
         <Link href="/search">
-          <a>
-            Search
-          </a>
+          <a>Search</a>
         </Link>
         <Link href="/contact">
-          <a>
-            Contact
-          </a>
+          <a>Contact</a>
         </Link>
-        { me && (
+        {me && (
           <>
             <Link href="/account">
-              <a>
-                Account
-              </a>
+              <a>Account</a>
+            </Link>
+            <Link href="/sell">
+              <a>Add Car</a>
             </Link>
             <SignOut />
           </>
         )}
-        { !me && (
+        {!me && (
           <>
             <Link href="/signin">
-              <a>
-                Sign In
-              </a>
+              <a>Sign In</a>
             </Link>
           </>
         )}
       </NavElement>
     )}
   </User>
-)
+);
 
 export default Nav;

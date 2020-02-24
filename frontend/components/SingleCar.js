@@ -32,10 +32,14 @@ const SingleCarElement = styled.div`
 
   .info {
     flex-direction: column;
-    flex-basis: calc(30% - 10px);
-    margin: 0 5px;
+    flex-basis: calc(30% - 5px);
+    margin-right: 5px;
     padding: 10px;
     border: 1px solid #ccc;
+
+    p {
+      margin: 5px 0;
+    }
   }
 
   .description {
@@ -87,23 +91,23 @@ class SingleCar extends Component {
                 <title>{car.title} | AutoLux</title>
               </Head>
               <h2>{car.title}</h2>
+              <aside className="info">
+                <p>Make: {car.make}</p>
+                <p>Model: {car.model}</p>
+                <p>Price: {car.price}</p>
+                <p>Mileage: {car.mileage}</p>
+                <p>Engine: {car.engine}</p>
+                <p>Transmission: {car.transmission}</p>
+                <p>Year: {car.year}</p>
+                <p>Num Of Gears: {car.numOfGears}</p>
+                <p>Power: {car.power}</p>
+                <p>Color: {car.color}</p>
+                <p>Engine: {car.engine}</p>
+                <p>Drive Wheel: {car.driveWheel}</p>
+              </aside>
               <div className="images">
                 <img src={car.largeImage} />
               </div>
-              <aside className="info">
-                <span>Make: {car.make}</span>
-                <span>Model: {car.model}</span>
-                <span>Price: {car.price}</span>
-                <span>Mileage: {car.mileage}</span>
-                <span>Engine: {car.engine}</span>
-                <span>Transmission: {car.transmission}</span>
-                <span>Year: {car.year}</span>
-                <span>Num Of Gears: {car.numOfGears}</span>
-                <span>Power: {car.power}</span>
-                <span>Color: {car.color}</span>
-                <span>Engine: {car.engine}</span>
-                <span>Drive Wheel: {car.driveWheel}</span>
-              </aside>
               <div className="description">
                 <p>{car.description}</p>
               </div>

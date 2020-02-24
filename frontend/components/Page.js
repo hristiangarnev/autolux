@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import styled, { ThemeProvider, injectGlobal } from 'styled-components';
-import Header from './Header';
-import Meta from './Meta';
+import React, { Component } from "react";
+import { injectGlobal } from "styled-components";
+import Header from "./Header";
+import Meta from "./Meta";
 
 injectGlobal`
   html {
@@ -27,15 +27,11 @@ injectGlobal`
     line-height: 1.2;
   }
 
-  #wrapper {
-    /* background: url('static/hero.jpg') no-repeat; */
-    /* background-size: cover; */
-  }
-
   .home,
   .car-view,
   .car-update,
   .search,
+  .sell,
   .contact,
   .loading {
     max-width: 960px;
@@ -65,7 +61,7 @@ class Page extends Component {
         <Header />
         {this.props.children}
       </div>
-    )
+    );
   }
 }
 

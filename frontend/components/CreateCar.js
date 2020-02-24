@@ -3,8 +3,7 @@ import { Mutation } from "react-apollo";
 import Router from "next/router";
 import gql from "graphql-tag";
 import styled from "styled-components";
-import cars from "../../backend/src/constants/cars";
-import colors from "../../backend/src/constants/colors";
+import { cars, colors } from "../../backend/src/constants/cars";
 
 const CREATE_CAR_MUTATION = gql`
   mutation CREATE_CAR_MUTATION(
@@ -53,6 +52,50 @@ const CREATE_CAR_MUTATION = gql`
 const SellForm = styled.form`
   label {
     display: flex;
+    align-items: center;
+    margin: 5px 0;
+
+    select,
+    textarea,
+    input {
+      font-size: 16px;
+      width: 150px;
+    }
+  }
+
+  fieldset {
+  }
+
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+
+  .images,
+  fieldset {
+    display: flex;
+  }
+
+  .images {
+    flex-basis: 70%;
+
+    img {
+      max-width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  fieldset {
+    flex-direction: column;
+    flex-basis: calc(30% - 5px);
+    margin: 0 5px 0 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .description {
+    display: flex;
+    flex-basis: 100%;
   }
 `;
 
@@ -121,8 +164,8 @@ class CreateCar extends Component {
     }
 
     return (
-      <>
-        <h2>Sell a car</h2>
+      <div className="sell">
+        <h2>Sell A Car</h2>
         <Mutation mutation={CREATE_CAR_MUTATION} variables={this.state}>
           {(createCar, { loading, error }) => (
             <SellForm
@@ -220,9 +263,6 @@ class CreateCar extends Component {
                     required
                     onChange={this.uploadFile}
                   />
-                  {this.state.image && (
-                    <img src={this.state.image} alt="Upload preview" />
-                  )}
                 </label>
 
                 <label htmlFor="mileage">
@@ -386,10 +426,16 @@ class CreateCar extends Component {
 
                 <button type="submit">Submit</button>
               </fieldset>
+
+              <div className="images">
+                {this.state.image && (
+                  <img src={this.state.image} alt="Upload preview" />
+                )}
+              </div>
             </SellForm>
           )}
         </Mutation>
-      </>
+      </div>
     );
   }
 }
